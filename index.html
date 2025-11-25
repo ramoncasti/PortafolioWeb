@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Portafolio | Ramón López</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap Icons (para íconos de LinkedIn, GitHub, etc.) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
+    <style>
+        :root {
+            --bg-main: #050816;
+            --bg-card: #0b1020;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.1);
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #111827 0, #020617 40%);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .navbar {
+            background: rgba(2, 6, 23, 0.9);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-link {
+            color: var(--text-muted) !important;
+            font-weight: 500;
+        }
+
+        .nav-link.active,
+        .nav-link:hover {
+            color: var(--accent) !important;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            padding-top: 6rem;
+            padding-bottom: 4rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 4vw, 3.4rem);
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        .highlight {
+            color: #facc15;
+            font-weight: 600;
+        }
+
+        .badge-role {
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-radius: 999px;
+            font-size: 0.8rem;
+            padding: 0.35rem 0.9rem;
+        }
+
+        .avatar-wrapper {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid #38bdf8;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Fondo difuminado detrás */
+        .avatar-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            
+            filter: blur(25px);
+            z-index: 0;
+        }
+
+        /* Imagen */
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            /* ← PRUÉBALO */
+        }
+
+
+        .btn-main {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #020617;
+            font-weight: 600;
+            border-radius: 999px;
+            padding-inline: 1.5rem;
+        }
+
+        .btn-main:hover {
+            background: #0ea5e9;
+            border-color: #0ea5e9;
+            color: #020617;
+        }
+
+        .btn-ghost {
+            border-radius: 999px;
+            border-color: var(--accent-soft);
+            background: transparent;
+            color: var(--text-main);
+        }
+
+        .btn-ghost:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .section-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-custom {
+            background: var(--bg-card);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 1.25rem;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card-custom:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.7);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .card-custom .card-title {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .card-custom .card-text {
+            color: var(--text-muted);
+            font-size: 0.97rem;
+        }
+
+        .tag-badge {
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text-muted);
+            border-radius: 999px;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.7rem;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+        }
+
+        footer {
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+            color: var(--text-muted);
+        }
+
+        /* Pequeño círculo decorativo al lado del nombre */
+        .dot-accent {
+            width: 12px;
+            height: 12px;
+            border-radius: 999px;
+            background: var(--accent);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.9);
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .avatar-wrapper {
+                margin-inline: auto;
+            }
+        }
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#mainNavbar" data-bs-offset="80">
+    <!-- Navbar -->
+    <nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2 text-light fw-semibold" href="#inicio">
+                <span class="dot-accent"></span>
+                <span>Ramón López</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <i class="bi bi-list text-light fs-3"></i>
+                </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#experiencia">Experiencia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#proyectos">Proyectos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sobre-mi">Sobre mí</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="inicio" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7">
+                    <span class="badge-role mb-3">Listo para trabajar</span>
+                    <h1 class="hero-title mb-2">Hola, soy Ramón</h1>
+                    <p class="hero-subtitle mb-3">
+                        <!--<span class="highlight">+3 años programando.</span>-->
+                        Estudiante de Ingeniería en Informática, enfocado en el desarrollo de software
+                        y automatización de procesos.
+                    </p>
+                    <p class="hero-subtitle mb-4">
+                        Me gusta aplicar principios de <span class="highlight">diseño limpio</span> y buenas prácticas,
+                        creando soluciones web que realmente aporten valor al negocio.
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-3 hero-buttons mb-4">
+                        <a href="#contacto" class="btn btn-main d-flex align-items-center gap-2">
+                            <i class="bi bi-envelope-fill"></i>
+                            Contáctame
+                        </a>
+                        <a href="https://www.linkedin.com/in/ram%C3%B3n-l%C3%B3pez-9a86a1203/" target="_blank"
+                            class="btn btn-ghost d-flex align-items-center gap-2">
+                            <i class="bi bi-linkedin"></i>
+                            LinkedIn
+                        </a>
+                        <a href="https://github.com/ramoncasti" target="_blank"
+                            class="btn btn-ghost d-flex align-items-center gap-2">
+                            <i class="bi bi-github"></i>
+                            GitHub
+                        </a>
+                    </div>
+
+                    <p class="text-secondary small">
+                        Desde Paraguay 🇵🇾 · Desarrollo web y automatización con Python, PHP y SQL.
+                    </p>
+                </div>
+
+                <div class="col-lg-5 d-flex justify-content-lg-end align-items-center">
+                    <div class="text-center">
+                        <div class="avatar-wrapper mb-3 mx-auto">
+                            <!-- Reemplaza la ruta por tu propia foto -->
+                            <img src="C:\Users\Ramon\Desktop\portafolio 2.0\Imagen.jpg" alt="Foto de Ramón" />
+                        </div>
+                        <strong class="text-white mb-1">Estudiante de Software · Backend · Data</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiencia laboral -->
+    <section id="experiencia" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Experiencia laboral</h2>
+
+            <div class="card card-custom">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap justify-content-between align-items-start mb-2">
+                        <div>
+                            <h5 class="card-title mb-0">Universidad Americana</h5>
+                            <small class="text-secondary">Soporte y Desarrollo de Software</small>
+                        </div>
+                        <span class="tag-badge mt-2 mt-sm-0">
+                            Python · PHP · SQL Server
+                        </span>
+                    </div>
+
+                    <p class="card-text mb-2">
+                        Participo activamente en proyectos de desarrollo, utilizando lenguajes como
+                        <span class="highlight">Python</span> y <span class="highlight">PHP</span>,
+                    </p>
+
+                    <ul class="card-text">
+                        <li>Creación y optimización de vistas, procedimientos almacenados y funciones en SQL Server.
+                        </li>
+                        <li>Mantenimiento de aplicaciones internas de la universidad.</li>
+                        <li>Soporte técnico en facturación electrónica y emisión de notas de crédito electrónicas.</li>
+                        <li>Soporte técnico a usuarios del ERP academico</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section id="proyectos" class="py-5">
+        <div class="container">
+            <h2 class="section-title mb-4">Proyectos destacados</h2>
+
+            <div class="row g-4 mb-5">
+                <!-- Proyecto 1 -->
+                <div class="col-md-6">
+                    <div class="card card-custom h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Análisis de Churn utilizando Python</h5>
+                            <p class="card-text">
+                                Modelo de análisis de abandono de clientes usando Python.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="tag-badge">Python</span>
+                                <span class="tag-badge">Pandas</span>
+                                <span class="tag-badge">Power BI</span>
+                                <span class="tag-badge">Sql Server</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2 -->
+                <div class="col-md-6">
+                    <div class="card card-custom h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Interfaz para emisión de Notas de Crédito</h5>
+                            <p class="card-text">
+                                Desarrollo de una interfaz web para gestionar la emisión de notas de crédito
+                                electrónicas,
+                                integrando el sistema de facturación de la universidad.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="tag-badge">Python</span>
+                                <span class="tag-badge">Bootstrap 5</span>
+                                <span class="tag-badge">SQL Server</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 3 -->
+                <div class="col-md-6">
+                    <div class="card card-custom h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Sistema de encuestas</h5>
+                            <p class="card-text">
+                                Sistema de encuestas para evaluar la calidad de atención al estudiante.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="tag-badge">PHP</span>
+                                <span class="tag-badge">SQL Server</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="h4 mb-3">Proyectos Personales</h3>
+            <div class="row g-4">
+                <!-- Personal 1 -->
+                <div class="col-md-6">
+                    <div class="card card-custom h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Sistema de gestión de flota de vehículos</h5>
+                            <p class="card-text">
+                                Aplicación para controlar vehículos, mantenimientos, gastos y asignaciones por chofer,
+                                con reportes de uso y costos.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="tag-badge">Angular</span>
+                                <span class="tag-badge">Nest JS</span>
+                                <span class="tag-badge">PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal 2 -->
+                <div class="col-md-6">
+                    <div class="card card-custom h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Sistema de gestión de pacientes odontológicos</h5>
+                            <p class="card-text">
+                                Sistema integral para clínicas odontológicas: registro de pacientes, fichas médicas,
+                                agendamiento, tratamientos y facturación.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="tag-badge">Django</span>
+                                <span class="tag-badge">PostgreSQL</span>
+                                <span class="tag-badge">Bootstrap 5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre mí -->
+    <section id="sobre-mi" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Sobre mí</h2>
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="card card-custom">
+                        <div class="card-body">
+                            <p class="card-text">
+                                Me apasiona el desarrollo backend, el análisis de datos y la automatización de tareas
+                                con Python. Disfruto aprender nuevas tecnologías y aplicar buenas prácticas
+                                de diseño de software en cada proyecto.
+                            </p>
+                            <p class="card-text">
+                                Busco oportunidades donde pueda seguir creciendo profesionalmente, aportar ideas
+                                y trabajar en equipo para construir productos de calidad.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card card-custom h-100">
+                        <div class="card-body">
+                            <h6 class="card-title mb-3">Tecnologías que manejo</h6>
+                            <ul class="card-text mb-0">
+                                <li>Python · PHP</li>
+                                <li>Django · Laravel</li>
+                                <li>SQL Server · PostgreSQL · OracleSQL</li>
+                                <li>HTML · CSS · Bootstrap 5</li>
+                                <li>Power BI · Power Automate</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <p class="text-secondary mb-3">
+                        ¿Te gustaría que trabajemos juntos o quieres saber más sobre alguno de mis proyectos?
+                        Podés escribirme directamente por correo o redes.
+                    </p>
+
+                    <div class="d-flex flex-column gap-2">
+                        <a href="mailto:ramonlopezcasti@gmail.com"
+                            class="text-decoration-none text-light d-flex align-items-center gap-2">
+                            <i class="bi bi-envelope-fill"></i>
+                            ramonlopezcasti@gmail.com
+                        </a>
+                        <a href="https://www.linkedin.com/in/ram%C3%B3n-l%C3%B3pez-9a86a1203/" target="_blank"
+                            class="text-decoration-none text-light d-flex align-items-center gap-2">
+                            <i class="bi bi-linkedin"></i>
+                            LinkedIn
+                        </a>
+                        <a href="https://github.com/ramoncasti" target="_blank"
+                            class="text-decoration-none text-light d-flex align-items-center gap-2">
+                            <i class="bi bi-github"></i>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Formulario simple (no envía, solo diseño) -->
+                    <div class="card card-custom">
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control bg-transparent text-light border-secondary"
+                                        id="nombre" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="correo" class="form-label">Correo</label>
+                                    <input type="email" class="form-control bg-transparent text-light border-secondary"
+                                        id="correo" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="mensaje" class="form-label">Mensaje</label>
+                                    <textarea class="form-control bg-transparent text-light border-secondary"
+                                        id="mensaje" rows="4"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-main w-100">
+                                    Enviar mensaje
+                                </button>
+                            </form>
+                            <small class="text-secondary d-block mt-2">
+                                * Puedes conectar este formulario a un backend o servicio de correo más adelante.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-3 mt-4">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <span>© 2025 Ramon Lopez. Derechos reservados.</span>
+            <span class="text-secondary small">Desarrollado con HTML, CSS, JavaScript y Bootstrap 5.</span>
+        </div>
+    </footer>
+
+    <!-- JS Bootstrap + Scroll suave -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Scroll suave para los enlaces del navbar
+        document.querySelectorAll('a.nav-link[href^="#"]').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
