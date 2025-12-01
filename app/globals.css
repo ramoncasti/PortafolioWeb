@@ -1,26 +1,206 @@
-@import "tailwindcss";
-
+/* ============================= */
+/* 🎨 VARIABLES Y FONDO GENERAL  */
+/* ============================= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --bg-main: #020617;
+  --bg-card: #0b1020;
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.1);
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #020617 !important;
+  background-image: radial-gradient(circle at top, #111827 0, #020617 40%) !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+
+  color: var(--text-main) !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================= */
+/* 🔷 NAVBAR */
+/* ============================= */
+.navbar {
+  background: rgba(2, 6, 23, 0.9) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.nav-link {
+  color: var(--text-muted) !important;
+  font-weight: 500;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  color: var(--accent) !important;
+}
+
+/* ============================= */
+/* 🧑‍💻 HERO */
+/* ============================= */
+.hero-section {
+  min-height: 100vh;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 4vw, 3.4rem);
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-main);
+}
+
+.highlight {
+  color: #facc15;
+  font-weight: 600;
+}
+
+/* Foto circular */
+.avatar-wrapper {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 4px solid var(--accent);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+}
+
+.avatar-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.dot-accent {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.9);
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+/* ============================= */
+/* 🔘 BOTONES */
+/* ============================= */
+.btn-main {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #020617 !important;
+  font-weight: 600 !important;
+  border-radius: 999px !important;
+  padding-inline: 1.5rem !important;
+}
+
+.btn-main:hover {
+  background: #0ea5e9 !important;
+  border-color: #0ea5e9 !important;
+  color: #020617 !important;
+}
+
+.btn-ghost {
+  border-radius: 999px !important;
+  border: 1px solid var(--accent-soft) !important;
+  background: transparent !important;
+  color: var(--text-main) !important;
+}
+
+.btn-ghost:hover {
+  background: var(--accent-soft) !important;
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+/* ============================= */
+/* 📦 CARDS */
+/* ============================= */
+.section-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.card,
+.card-custom {
+  background: var(--bg-card) !important;
+  border-radius: 1.25rem !important;
+  border: 1px solid rgba(148, 163, 184, 0.1) !important;
+  color: var(--text-main) !important;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.4) !important;
+}
+
+.card-custom:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.7) !important;
+  border-color: rgba(56, 189, 248, 0.4) !important;
+}
+
+.tag-badge {
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--text-muted);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+/* ============================= */
+/* 🖼 IMÁGENES DE PROYECTOS */
+/* ============================= */
+.project-img {
+  height: 260px !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+/* ============================= */
+/* 🎞 CARRUSEL */
+/* ============================= */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1) brightness(1.8) !important;
+}
+
+.carousel,
+.carousel-inner,
+.carousel-item {
+  background: transparent !important;
+}
+
+/* ============================= */
+/* 📱 RESPONSIVE */
+/* ============================= */
+@media (max-width: 768px) {
+  .hero-section {
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .avatar-wrapper {
+    margin-inline: auto;
+  }
+}
+
+#contacto a {
+  text-decoration: none;
+}
+
+footer {
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  color: var(--text-muted);
 }
